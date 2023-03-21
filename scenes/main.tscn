@@ -1,0 +1,79 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfetaderrjera"]
+
+[ext_resource type="Script" path="res://scripts/map_generator.gd" id="1_v47i0"]
+[ext_resource type="Texture2D" uid="uid://dpmff6c54dr1y" path="res://assets/hextiles/grassland_flower.png" id="2_eun2o"]
+[ext_resource type="Texture2D" uid="uid://bi8gmuvofmub2" path="res://assets/hextiles/grassland.png" id="3_qowkd"]
+[ext_resource type="Texture2D" uid="uid://d0g6flmsygbkp" path="res://assets/hextiles/ocean_shallow.png" id="4_a5tft"]
+[ext_resource type="Texture2D" uid="uid://dbcc0cl0m0uvv" path="res://assets/hextiles/ocean_mid.png" id="5_dvnqt"]
+[ext_resource type="Texture2D" uid="uid://tcnwhdek04y7" path="res://assets/hextiles/ocean_deep.png" id="6_bqxha"]
+[ext_resource type="PackedScene" uid="uid://cysjle72qf256" path="res://scenes/hex_tile.tscn" id="7_a4oek"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8osmi"]
+texture = ExtResource("2_eun2o")
+margins = Vector2i(31, 15)
+texture_region_size = Vector2i(130, 146)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_olgnl"]
+texture = ExtResource("3_qowkd")
+margins = Vector2i(31, 15)
+texture_region_size = Vector2i(130, 146)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_42b4e"]
+texture = ExtResource("4_a5tft")
+margins = Vector2i(31, 15)
+texture_region_size = Vector2i(130, 146)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0g68u"]
+texture = ExtResource("5_dvnqt")
+margins = Vector2i(31, 15)
+texture_region_size = Vector2i(130, 146)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pl5f2"]
+texture = ExtResource("6_bqxha")
+margins = Vector2i(31, 15)
+texture_region_size = Vector2i(130, 146)
+0:0/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_viqpo"]
+resource_name = "hex_tile"
+scenes/1/scene = ExtResource("7_a4oek")
+
+[sub_resource type="TileSet" id="TileSet_q4ohl"]
+tile_shape = 3
+tile_size = Vector2i(126, 144)
+sources/1 = SubResource("TileSetAtlasSource_8osmi")
+sources/2 = SubResource("TileSetAtlasSource_olgnl")
+sources/5 = SubResource("TileSetAtlasSource_pl5f2")
+sources/3 = SubResource("TileSetAtlasSource_42b4e")
+sources/4 = SubResource("TileSetAtlasSource_0g68u")
+sources/7 = SubResource("TileSetScenesCollectionSource_viqpo")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_v47i0")
+map_size = 15
+
+[node name="Ground" type="TileMap" parent="."]
+scale = Vector2(0.5, 0.5)
+tile_set = SubResource("TileSet_q4ohl")
+format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(576, 324)
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 3.0
+offset_top = 495.0
+offset_right = 153.0
+offset_bottom = 644.999
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 145.0
+offset_bottom = 145.0
