@@ -3,6 +3,8 @@ extends Node
 @onready var ground : TileMap = $Ground
 @onready var globals = get_node("/root/Globals")
 
+@onready var hex_scene = preload("res://scenes/hex_tile.tscn")
+
 @export var map_size : int = 10
 @export_group("Height Map Settings")
 @export_range(0,1) var deep_water : float = 0.1 
@@ -18,6 +20,7 @@ extends Node
 func _ready():
 	#Initial map generation
 	DrawMap()
+	hex_scene.instantiate()
 
 func _input(event):
 	#Regenerate map on demand
@@ -38,7 +41,7 @@ func DrawMap():
 	for x in range(map_size):
 		for y in range(map_size):
 			var tile = map[x][y]
-			ground.set_cell(0, Vector2i(x, y), 7, Vector2.ZERO, 1)
+			ground.set_cell(0, Vector2i(x, y), 1, Vector2.ZERO, 1)
 			await ground.child_entered_tree
 			var node = ground.get_child(ground.get_child_count()-1)
 			node.SetTile(tile)

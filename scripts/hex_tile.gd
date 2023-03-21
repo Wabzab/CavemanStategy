@@ -23,4 +23,6 @@ func SetTile(tile_type):
 			texture = load("res://assets/hextiles/snow.png")
 		globals.TileType.TUNDRA:
 			texture = load("res://assets/hextiles/tundra.png")
+		_:
+			print("Tile could not be found!")
 
