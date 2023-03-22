@@ -14,5 +14,6 @@ shallow_water = 0.4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(576, 324)
+zoom = Vector2(2, 2)
 script = ExtResource("8_11pl4")
 speed = 20

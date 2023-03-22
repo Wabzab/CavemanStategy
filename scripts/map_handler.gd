@@ -69,7 +69,7 @@ func GenerateTemperatureMap(size: int):
 	temp_map.noise.seed = randi()
 	temp_map.width = size
 	temp_map.height = size
-	await temp_map.changed
+	await temp_map.changed # causing freed object emitting signal error? prob engine issue
 	var temp_image = temp_map.get_image()
 	return temp_image
 	# ----- ||   Complete   || ----- #
@@ -129,6 +129,8 @@ func ClearMap():
 	map.clear()
 	print(map_node.get_child_count())
 	for child in map_node.get_children():
-		child.queue_free()
+		#map_node.remove_child.call_deferred(child)
+		child.queue_free() # queue_free vs map_node.remove_child(child)?
+			
 
 
