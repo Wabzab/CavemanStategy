@@ -1,11 +1,12 @@
 extends Node
 
-@onready var ground : TileMap = $Ground
+@onready var map_node: Node2D = $MapNode
 @onready var globals = get_node("/root/Globals")
 
 @onready var hex_scene = preload("res://scenes/hex_tile.tscn")
 
 @export var map_size : int = 10
+@export var map_scale : float = 1
 @export_group("Height Map Settings")
 @export_range(0,1) var deep_water : float = 0.1 
 @export_range(0,1) var mid_water : float = 0.3 
@@ -15,18 +16,32 @@ extends Node
 @export_range(0,1) var snow: float = 0.1
 @export_range(0,1) var tundra: float = 0.3
 @export_range(0,1) var grassland: float = 0.7
+@export_group("Hexagon Settings")
+@export var tile_width: int = 126
+@export var tile_height: int = 144
 
+var map = []
 
 func _ready():
 	#Initial map generation
-	DrawMap()
-	hex_scene.instantiate()
+	InitialiseMap(map_size)
 
 func _input(event):
 	#Regenerate map on demand
 	if event.is_action_pressed("reload"):
-		await ClearMap()
-		DrawMap()
+		ClearMap()
+		InitialiseMap(map_size)
+
+func InitialiseMap(size: int):
+	for x in range(size):
+		map.append([])
+		for y in range(size):
+			map[x].append(null)
+	
+	var world_map = await GenerateNewMap(size)
+	SetMap(world_map)
+	DrawMap()
+	map_node.scale = Vector2(map_scale, map_scale)
 
 func GenerateNewMap(size: int):
 	var height_map: Image = await GenerateHeightMap(size)
@@ -34,23 +49,12 @@ func GenerateNewMap(size: int):
 	var world_map: Array = EvaluateWorldMap(height_map, temp_map, size)
 	return world_map
 
-func DrawMap():
-	#Fetch heightmap
-	var map = await GenerateNewMap(map_size)
-	#Populate tilemap and render
-	for x in range(map_size):
-		for y in range(map_size):
-			var tile = map[x][y]
-			ground.set_cell(0, Vector2i(x, y), 1, Vector2.ZERO, 1)
-			await ground.child_entered_tree
-			var node = ground.get_child(ground.get_child_count()-1)
-			node.SetTile(tile)
-
 func GenerateHeightMap(size: int):
 	# ----- || Gen Height Map || ----- #
 	var height_map = NoiseTexture2D.new()
 	height_map.noise = FastNoiseLite.new()
 	height_map.noise.seed = randi()
+	height_map.noise.set_noise_type(FastNoiseLite.TYPE_CELLULAR)
 	height_map.width = size
 	height_map.height = size
 	await height_map.changed
@@ -105,7 +109,26 @@ func EvaluateWorldMap(height_map: Image, temp_map: Image, size: int):
 	return world_map
 	# ----- |    Done    | ----- #
 
+func SetMap(world_map: Array):
+	for x in range(world_map.size()):
+		for y in range(world_map.size()):
+			var new_tile = hex_scene.instantiate()
+			new_tile.SetTile(world_map[x][y], globals)
+			map[x][y] = new_tile
+
+func DrawMap():
+	for y in range(map.size()):
+		for x in range(map.size()):
+			var delta_x: int = (tile_width * x) + (tile_width/2 * (y%2))
+			var delta_y: int = (tile_height/1.3 * y)
+			var pos = Vector2i(delta_x, delta_y)
+			map[x][y].position = pos
+			map_node.add_child(map[x][y])
+
 func ClearMap():
-	for child in ground.get_children():
+	map.clear()
+	print(map_node.get_child_count())
+	for child in map_node.get_children():
 		child.queue_free()
-		await ground.child_exiting_tree
+
+

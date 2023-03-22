@@ -1,28 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfetaderrjera"]
+[gd_scene load_steps=3 format=3 uid="uid://bt5sjvoo2ym37"]
 
-[ext_resource type="Script" path="res://scripts/map_generator.gd" id="1_v47i0"]
-[ext_resource type="PackedScene" uid="uid://cysjle72qf256" path="res://scenes/hex_tile.tscn" id="7_a4oek"]
+[ext_resource type="Script" path="res://scripts/map_handler.gd" id="1_qfkkg"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="8_11pl4"]
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_viqpo"]
-resource_name = "hex_tile"
-scenes/1/scene = ExtResource("7_a4oek")
-
-[sub_resource type="TileSet" id="TileSet_q4ohl"]
-tile_shape = 3
-tile_size = Vector2i(126, 144)
-sources/1 = SubResource("TileSetScenesCollectionSource_viqpo")
-
 [node name="Main" type="Node2D"]
-script = ExtResource("1_v47i0")
+script = ExtResource("1_qfkkg")
+map_size = 50
+map_scale = 0.2
 mid_water = 0.25
 shallow_water = 0.4
 
-[node name="Ground" type="TileMap" parent="."]
-scale = Vector2(0.5, 0.5)
-tile_set = SubResource("TileSet_q4ohl")
-format = 2
+[node name="MapNode" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(576, 324)
 script = ExtResource("8_11pl4")
+speed = 20

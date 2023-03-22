@@ -1,10 +1,8 @@
 extends Sprite2D
 
-var globals
 var neighbours = []
 
-func SetTile(tile_type):
-	globals = get_node("/root/Globals")
+func SetTile(tile_type, globals):
 	# Assign unique attributes to each biome type
 	match tile_type:
 		globals.TileType.OCEAN_DEEP:
