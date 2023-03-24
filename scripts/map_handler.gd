@@ -1,6 +1,10 @@
 extends Node
 
 @onready var map_node: Node2D = $MapNode
+@onready var map_size_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/MapSize/SpinBox
+@onready var noise_type_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/NoiseType/SpinBox
+@onready var fractal_type_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/FractalType/SpinBox
+@onready var freqeuncy_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/Frequency/SpinBox
 @onready var globals = get_node("/root/Globals")
 
 @onready var hex_scene = preload("res://scenes/hex_tile.tscn")
@@ -12,6 +16,9 @@ extends Node
 @export_range(0,1) var mid_water : float = 0.3 
 @export_range(0,1) var shallow_water : float = 0.45
 @export_range(0,100) var flower_chance : int = 25
+@export_range(0,5) var noise_type : int = 0
+@export_range(0,3) var fractal_type : int = 0
+@export_range(1, 100) var frequency : int = 1
 @export_group("Temperature Map Settings")
 @export_range(0,1) var snow: float = 0.1
 @export_range(0,1) var tundra: float = 0.3
@@ -29,8 +36,7 @@ func _ready():
 func _input(event):
 	#Regenerate map on demand
 	if event.is_action_pressed("reload"):
-		ClearMap()
-		InitialiseMap(map_size)
+		_on_button_pressed()
 
 func InitialiseMap(size: int):
 	for x in range(size):
@@ -54,7 +60,9 @@ func GenerateHeightMap(size: int):
 	var height_map = NoiseTexture2D.new()
 	height_map.noise = FastNoiseLite.new()
 	height_map.noise.seed = randi()
-	height_map.noise.set_noise_type(FastNoiseLite.TYPE_CELLULAR)
+	height_map.noise.set_noise_type(noise_type)
+	height_map.noise.set_fractal_type(fractal_type)
+	height_map.noise.set_frequency(frequency/100.0)
 	height_map.width = size
 	height_map.height = size
 	await height_map.changed
@@ -127,10 +135,14 @@ func DrawMap():
 
 func ClearMap():
 	map.clear()
-	print(map_node.get_child_count())
 	for child in map_node.get_children():
-		#map_node.remove_child.call_deferred(child)
-		child.queue_free() # queue_free vs map_node.remove_child(child)?
-			
+		child.free()
 
 
+func _on_button_pressed():
+	map_size = map_size_node.value
+	noise_type = noise_type_node.value
+	fractal_type = fractal_type_node.value
+	frequency = freqeuncy_node.value
+	ClearMap()
+	InitialiseMap(map_size)
