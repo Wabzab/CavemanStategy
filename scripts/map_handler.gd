@@ -31,7 +31,8 @@ var map = []
 
 
 ###
-# Create a pool of hextiles that are used to build the map and reused on regeneration
+# Create a pool of hextiles that are used to build the map and reused on generation
+# Some silly text
 ###
 
 
