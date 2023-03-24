@@ -29,6 +29,12 @@ extends Node
 
 var map = []
 
+
+###
+# Create a pool of hextiles that are used to build the map and reused on regeneration
+###
+
+
 func _ready():
 	#Initial map generation
 	InitialiseMap(map_size)
