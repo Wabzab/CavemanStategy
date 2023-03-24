@@ -9,7 +9,7 @@ func _process(_delta):
 		Input.get_action_strength("pan_down") - Input.get_action_strength("pan_up")
 	)
 	
-	offset += direction.normalized() * speed
+	offset += direction.normalized() * speed * (1/zoom.x)
 
 # zoom inputs
 func _input(event):
