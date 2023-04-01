@@ -5,7 +5,6 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_qfkkg")
-map_size = 50
 map_scale = 0.2
 mid_water = 0.25
 shallow_water = 0.4
@@ -57,8 +56,8 @@ text = "Map Size: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/MapSize"]
 layout_mode = 2
-min_value = 25.0
-value = 50.0
+min_value = 10.0
+value = 10.0
 
 [node name="NoiseType" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2

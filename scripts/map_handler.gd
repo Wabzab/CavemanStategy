@@ -9,7 +9,8 @@ extends Node
 
 @onready var hex_scene = preload("res://scenes/hex_tile.tscn")
 
-@export var map_size : int = 10
+const max_size: int = 100
+@export_range(10, max_size) var map_size : int = 10
 @export var map_scale : float = 1
 @export_group("Height Map Settings")
 @export_range(0,1) var deep_water : float = 0.1 
@@ -27,17 +28,17 @@ extends Node
 @export var tile_width: int = 126
 @export var tile_height: int = 144
 
-var map = []
-
-
 ###
 # Create a pool of hextiles that are used to build the map and reused on generation
-# Some silly text
+# On map regen, compare map size to current hextiles
+# If greater, create new hextiles
+# If lesser, set excess tiles to null and [0,0]
 ###
 
 
 func _ready():
 	#Initial map generation
+	SetUpTiles(max_size)
 	InitialiseMap(map_size)
 
 func _input(event):
@@ -45,12 +46,13 @@ func _input(event):
 	if event.is_action_pressed("reload"):
 		_on_button_pressed()
 
+func SetUpTiles(size: int):
+	for i in range(size*size):
+		var new_tile = hex_scene.instantiate()
+		new_tile.position = Vector2(0, 0)
+		map_node.add_child(new_tile)
+
 func InitialiseMap(size: int):
-	for x in range(size):
-		map.append([])
-		for y in range(size):
-			map[x].append(null)
-	
 	var world_map = await GenerateNewMap(size)
 	SetMap(world_map)
 	DrawMap()
@@ -125,29 +127,31 @@ func EvaluateWorldMap(height_map: Image, temp_map: Image, size: int):
 	# ----- |    Done    | ----- #
 
 func SetMap(world_map: Array):
+	var index = 0
 	for x in range(world_map.size()):
 		for y in range(world_map.size()):
-			var new_tile = hex_scene.instantiate()
-			new_tile.SetTile(world_map[x][y], globals)
-			map[x][y] = new_tile
+			map_node.get_child(index).SetTile(world_map[x][y], globals)
+			index += 1
+		index += (max_size - world_map.size())
 
 func DrawMap():
-	for y in range(map.size()):
-		for x in range(map.size()):
+	var size = sqrt(map_node.get_child_count())
+	var index = 0
+	for y in range(size):
+		for x in range(size):
 			var delta_x: int = (tile_width * x) + (tile_width/2 * (y%2))
 			var delta_y: int = (tile_height/1.3 * y)
-			var pos = Vector2i(delta_x, delta_y)
-			map[x][y].position = pos
-			map_node.add_child(map[x][y])
+			var pos = Vector2(delta_x, delta_y)
+			map_node.get_child(index).position = pos
+			index += 1
 
 func ClearMap():
-	map.clear()
-	for child in map_node.get_children():
-		child.free()
+	for i in range(map_node.get_child_count()):
+		map_node.get_child(i).SetTile(globals.TileType.NULL, globals)
 
 
 func _on_button_pressed():
-	map_size = map_size_node.value
+	map_size = clamp(map_size_node.value, 10, max_size)
 	noise_type = noise_type_node.value
 	fractal_type = fractal_type_node.value
 	frequency = freqeuncy_node.value
