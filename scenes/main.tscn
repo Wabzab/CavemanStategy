@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt5sjvoo2ym37"]
+[gd_scene load_steps=4 format=3 uid="uid://bt5sjvoo2ym37"]
 
 [ext_resource type="Script" path="res://scripts/map_handler.gd" id="1_qfkkg"]
+[ext_resource type="Texture2D" uid="uid://xcknbm0alyge" path="res://assets/maps/Island.png" id="3_qix5w"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="8_11pl4"]
 
 [node name="Main" type="Node2D"]
@@ -191,6 +192,19 @@ custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+
+[node name="Label3" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Blend Image
+"
+
+[node name="tr_blendimage" type="TextureRect" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("3_qix5w")
 
 [node name="RightMargin" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
 custom_minimum_size = Vector2(20, 0)

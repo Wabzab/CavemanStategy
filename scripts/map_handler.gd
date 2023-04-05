@@ -5,6 +5,7 @@ extends Node
 @onready var map_size_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/MapSize/SpinBox
 @onready var tr_heightmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_heightmap
 @onready var tr_tempmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_tempmap
+@onready var tr_blendimage: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_blendimage
 # Height Map vars
 @onready var height_noise_type: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/NoiseType/SpinBox
 @onready var height_fractal_type: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/FractalType/SpinBox
@@ -88,8 +89,13 @@ func GenerateHeightMap(size: int, seed: int):
 	height_map.width = size
 	height_map.height = size
 	await height_map.changed
-	tr_heightmap.texture = height_map
-	var height_image = height_map.get_image()
+	var height_image: Image = height_map.get_image()
+	var blend_image: Image = tr_blendimage.texture.get_image()
+	blend_image.resize(size, size)
+	
+	height_image = BlendImage(height_image, blend_image, 2)
+	
+	tr_heightmap.texture = ImageTexture.create_from_image(height_image)
 	return height_image
 	# ----- ||    Complete    || ----- #
 
@@ -169,6 +175,15 @@ func ClearMap():
 	for i in range(map_node.get_child_count()):
 		map_node.get_child(i).SetTile(globals.TileType.NULL, globals)
 
+func BlendImage(image1: Image, image2: Image, weight: int):
+	# Merges image1 and image2 with a weight towards image2
+	var return_image = Image.create(image1.get_width(), image1.get_height(), false, Image.FORMAT_RGB8)
+	var color: Color
+	for y in range(image1.get_height()):
+		for x in range(image1.get_width()):
+			color = image1.get_pixel(x, y) * (image2.get_pixel(x, y) * weight)
+			return_image.set_pixel(x, y, color)
+	return return_image
 
 func _on_button_pressed():
 	# Adjust map size
