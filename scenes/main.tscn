@@ -59,6 +59,10 @@ layout_mode = 2
 min_value = 10.0
 value = 10.0
 
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+text = "Height Map Settings:"
+
 [node name="NoiseType" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
 
@@ -96,9 +100,54 @@ layout_mode = 2
 min_value = 1.0
 value = 1.0
 
+[node name="Label2" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+text = "Temp Map Settings:"
+
+[node name="NoiseType2" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/NoiseType2"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Noise Type: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/NoiseType2"]
+layout_mode = 2
+max_value = 5.0
+
+[node name="FractalType2" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/FractalType2"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Fractal Type: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/FractalType2"]
+layout_mode = 2
+max_value = 3.0
+
+[node name="Frequency2" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Frequency2"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Frequency: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Frequency2"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+
 [node name="Button" type="Button" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
 text = "Generate"
+
+[node name="Seed" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+text = "Seed: NaN"
 
 [node name="TopMargin2" type="MarginContainer" parent="Camera2D/UI/VBC"]
 custom_minimum_size = Vector2(0, 20)
