@@ -3,6 +3,8 @@ extends Node
 @onready var map_node: Node2D = $MapNode
 @onready var lbl_seed: Label = $Camera2D/UI/VBC/HBC/PC/VBC/Seed
 @onready var map_size_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/MapSize/SpinBox
+@onready var tr_heightmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_heightmap
+@onready var tr_tempmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_tempmap
 # Height Map vars
 @onready var height_noise_type: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/NoiseType/SpinBox
 @onready var height_fractal_type: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/FractalType/SpinBox
@@ -86,6 +88,7 @@ func GenerateHeightMap(size: int, seed: int):
 	height_map.width = size
 	height_map.height = size
 	await height_map.changed
+	tr_heightmap.texture = height_map
 	var height_image = height_map.get_image()
 	return height_image
 	# ----- ||    Complete    || ----- #
@@ -100,7 +103,8 @@ func GenerateTemperatureMap(size: int, seed: int):
 	temp_map.noise.set_frequency(temp_frequency/100.0)
 	temp_map.width = size
 	temp_map.height = size
-	await temp_map.changed # causing freed object emitting signal error? prob engine issue
+	await temp_map.changed
+	tr_tempmap.texture = temp_map
 	var temp_image = temp_map.get_image()
 	return temp_image
 	# ----- ||   Complete   || ----- #

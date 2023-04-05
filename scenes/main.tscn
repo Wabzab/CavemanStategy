@@ -41,6 +41,8 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="PC" type="PanelContainer" parent="Camera2D/UI/VBC/HBC"]
+self_modulate = Color(1, 1, 1, 0.490196)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="VBC" type="VBoxContainer" parent="Camera2D/UI/VBC/HBC/PC"]
@@ -148,6 +150,51 @@ text = "Generate"
 [node name="Seed" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
 text = "Seed: NaN"
+
+[node name="CentreMargin" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Maps" type="PanelContainer" parent="Camera2D/UI/VBC/HBC"]
+self_modulate = Color(1, 1, 1, 0.490196)
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/UI/VBC/HBC/Maps"]
+layout_mode = 2
+
+[node name="MarginTop" type="MarginContainer" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Height Map
+"
+
+[node name="tr_heightmap" type="TextureRect" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label2" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Temperature Map
+"
+
+[node name="tr_tempmap" type="TextureRect" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="RightMargin" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
 
 [node name="TopMargin2" type="MarginContainer" parent="Camera2D/UI/VBC"]
 custom_minimum_size = Vector2(0, 20)
