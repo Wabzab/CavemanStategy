@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd4xxowe8cpai"
-path="res://.godot/imported/Island.png-d1d970892f254ebda75deb7ace3fd350.ctex"
+uid="uid://cm7kynrhfjrs5"
+path="res://.godot/imported/Crater.png-b88fde21592eb5001d1381b7f997446f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maps/Island.png"
-dest_files=["res://.godot/imported/Island.png-d1d970892f254ebda75deb7ace3fd350.ctex"]
+source_file="res://assets/maps/Crater.png"
+dest_files=["res://.godot/imported/Crater.png-b88fde21592eb5001d1381b7f997446f.ctex"]
 
 [params]
 

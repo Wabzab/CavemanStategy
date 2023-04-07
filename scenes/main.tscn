@@ -1,14 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://bt5sjvoo2ym37"]
 
 [ext_resource type="Script" path="res://scripts/map_handler.gd" id="1_qfkkg"]
-[ext_resource type="Texture2D" uid="uid://xcknbm0alyge" path="res://assets/maps/Island.png" id="3_qix5w"]
+[ext_resource type="Texture2D" uid="uid://bd4xxowe8cpai" path="res://assets/maps/Island.png" id="3_yo4y0"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="8_11pl4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_qfkkg")
 map_scale = 0.2
-mid_water = 0.25
-shallow_water = 0.4
 
 [node name="MapNode" type="Node2D" parent="."]
 
@@ -27,7 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopMargin" type="MarginContainer" parent="Camera2D/UI/VBC"]
+[node name="tm" type="MarginContainer" parent="Camera2D/UI/VBC"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
@@ -37,7 +35,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
-[node name="LeftMargin" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
+[node name="lm" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
@@ -59,12 +57,78 @@ text = "Map Size: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/MapSize"]
 layout_mode = 2
+size_flags_horizontal = 10
 min_value = 10.0
-value = 10.0
+value = 50.0
 
-[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+[node name="Height" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
 text = "Height Map Settings:"
+
+[node name="Deep" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Deep"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Deep Water: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Deep"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 10.0
+
+[node name="Mid" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Mid"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Mid Water: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Mid"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 30.0
+
+[node name="Shallow" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Shallow"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Shallow Water: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Shallow"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 45.0
+
+[node name="Mountain" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Mountain"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Mountain:"
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Mountain"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 90.0
+
+[node name="Hill" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Hill"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Hill: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Hill"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 80.0
 
 [node name="NoiseType" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -76,7 +140,9 @@ text = "Noise Type: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/NoiseType"]
 layout_mode = 2
+size_flags_horizontal = 10
 max_value = 5.0
+value = 2.0
 
 [node name="FractalType" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -88,7 +154,9 @@ text = "Fractal Type: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/FractalType"]
 layout_mode = 2
+size_flags_horizontal = 10
 max_value = 3.0
+value = 1.0
 
 [node name="Frequency" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -100,12 +168,52 @@ text = "Frequency: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Frequency"]
 layout_mode = 2
+size_flags_horizontal = 10
 min_value = 1.0
-value = 1.0
+value = 5.0
 
-[node name="Label2" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+[node name="Temp" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
 text = "Temp Map Settings:"
+
+[node name="Snow" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Snow"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Snow: "
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Snow"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 10.0
+
+[node name="Tundra" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Tundra"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Tundra:"
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Tundra"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 30.0
+
+[node name="Grass" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/PC/VBC/Grass"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Grass:"
+
+[node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Grass"]
+layout_mode = 2
+size_flags_horizontal = 10
+value = 70.0
 
 [node name="NoiseType2" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -117,7 +225,9 @@ text = "Noise Type: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/NoiseType2"]
 layout_mode = 2
+size_flags_horizontal = 10
 max_value = 5.0
+value = 1.0
 
 [node name="FractalType2" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -129,7 +239,9 @@ text = "Fractal Type: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/FractalType2"]
 layout_mode = 2
+size_flags_horizontal = 10
 max_value = 3.0
+value = 3.0
 
 [node name="Frequency2" type="HBoxContainer" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -141,8 +253,9 @@ text = "Frequency: "
 
 [node name="SpinBox" type="SpinBox" parent="Camera2D/UI/VBC/HBC/PC/VBC/Frequency2"]
 layout_mode = 2
+size_flags_horizontal = 10
 min_value = 1.0
-value = 1.0
+value = 5.0
 
 [node name="Button" type="Button" parent="Camera2D/UI/VBC/HBC/PC/VBC"]
 layout_mode = 2
@@ -152,7 +265,7 @@ text = "Generate"
 layout_mode = 2
 text = "Seed: NaN"
 
-[node name="CentreMargin" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
+[node name="cm" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -169,7 +282,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+[node name="Height" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Height Map
@@ -181,7 +294,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Label2" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+[node name="Temp" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Temperature Map
@@ -193,7 +306,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Label3" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
+[node name="Height-Blend" type="Label" parent="Camera2D/UI/VBC/HBC/Maps/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Blend Image
@@ -204,13 +317,13 @@ custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-texture = ExtResource("3_qix5w")
+texture = ExtResource("3_yo4y0")
 
-[node name="RightMargin" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
+[node name="rm" type="MarginContainer" parent="Camera2D/UI/VBC/HBC"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="TopMargin2" type="MarginContainer" parent="Camera2D/UI/VBC"]
+[node name="bm" type="MarginContainer" parent="Camera2D/UI/VBC"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 

@@ -4,3 +4,5 @@
 
 [node name="HexTile" type="Sprite2D"]
 script = ExtResource("1_bqvrh")
+
+[node name="feature" type="Sprite2D" parent="."]

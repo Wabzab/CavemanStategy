@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd4xxowe8cpai"
-path="res://.godot/imported/Island.png-d1d970892f254ebda75deb7ace3fd350.ctex"
+uid="uid://dg1iolw87xkgy"
+path="res://.godot/imported/snow_hill.png-ca7bceab8bc586fe0858b35ede6bf5ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maps/Island.png"
-dest_files=["res://.godot/imported/Island.png-d1d970892f254ebda75deb7ace3fd350.ctex"]
+source_file="res://assets/features/snow_hill.png"
+dest_files=["res://.godot/imported/snow_hill.png-ca7bceab8bc586fe0858b35ede6bf5ab.ctex"]
 
 [params]
 
