@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2tcdy0n2p7gg"
-path="res://.godot/imported/sand_hill.png-e4c50a48f618d3e90822cb0c2df261e2.ctex"
+uid="uid://c6devfv8g8oe8"
+path="res://.godot/imported/snow_hill_v2.png-d72076bcaf55ed8d0398bd4fc39e403e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/features/sand_hill.png"
-dest_files=["res://.godot/imported/sand_hill.png-e4c50a48f618d3e90822cb0c2df261e2.ctex"]
+source_file="res://assets/hills/snow_hill_v2.png"
+dest_files=["res://.godot/imported/snow_hill_v2.png-d72076bcaf55ed8d0398bd4fc39e403e.ctex"]
 
 [params]
 

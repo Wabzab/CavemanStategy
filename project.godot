@@ -14,10 +14,6 @@ config/name="CavemanStategy"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 
-[autoload]
-
-Globals="*res://scripts/globals.gd"
-
 [input]
 
 reload={

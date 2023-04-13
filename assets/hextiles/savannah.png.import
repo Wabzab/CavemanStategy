@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4dhg6lmplsa3"
-path="res://.godot/imported/grass_hill.png-db05ee8488a46e95a737ee3df39e1e01.ctex"
+uid="uid://dx1naje3qh7hy"
+path="res://.godot/imported/savannah.png-541f8f6850a19478b1165936a562336c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/features/grass_hill.png"
-dest_files=["res://.godot/imported/grass_hill.png-db05ee8488a46e95a737ee3df39e1e01.ctex"]
+source_file="res://assets/hextiles/savannah.png"
+dest_files=["res://.godot/imported/savannah.png-541f8f6850a19478b1165936a562336c.ctex"]
 
 [params]
 

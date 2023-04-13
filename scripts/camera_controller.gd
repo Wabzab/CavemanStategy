@@ -1,7 +1,8 @@
 extends Camera2D
 
 @export var speed: int = 10
-
+@export var min_zoom: float = 0.5
+@export var max_zoom: float = 3.0
 
 func _process(_delta):
 	var direction = Vector2(
@@ -20,5 +21,5 @@ func _input(event):
 	if event.is_action_pressed("zoom_out"):
 		zoom = zoom - Vector2(0.1,0.1) - (0.10 * zoom)
 		
-	zoom = zoom.clamp(Vector2(0.5,0.5), Vector2(3.0,3.0))
+	zoom = zoom.clamp(Vector2(min_zoom,min_zoom), Vector2(max_zoom,max_zoom))
 		

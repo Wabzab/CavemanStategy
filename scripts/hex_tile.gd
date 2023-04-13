@@ -1,58 +1,108 @@
 extends Sprite2D
 
-@onready var feature: Sprite2D = $feature
+@onready var hill: Sprite2D = $hill
+@onready var tree: Sprite2D = $tree
 var neighbours = []
 
-func SetTile(tile_type, globals):
+func SetTile(tile_type, TileType):
 	# Assign unique attributes to each biome type
 	match tile_type:
-		globals.TileType.OCEAN_DEEP:
+#		Water-Based Tiles
+		TileType.OCEAN_DEEP:
 			texture = load("res://assets/hextiles/ocean_deep.png")
-			feature.texture = null
-		globals.TileType.OCEAN_MID:
+			hill.texture = null
+			tree.texture = null
+		TileType.OCEAN_MID:
 			texture = load("res://assets/hextiles/ocean_mid.png")
-			feature.texture = null
-		globals.TileType.OCEAN_SHALLOW:
+			hill.texture = null
+			tree.texture = null
+		TileType.OCEAN_SHALLOW:
 			texture = load("res://assets/hextiles/ocean_shallow.png")
-			feature.texture = null
-		globals.TileType.GRASS:
-			texture = load("res://assets/hextiles/grassland.png")
-			feature.texture = null
-		globals.TileType.GRASS_FLOWER:
-			texture = load("res://assets/hextiles/grassland_flower.png")
-			feature.texture = null
-		globals.TileType.GRASS_HILL:
-			texture = load("res://assets/hextiles/grassland.png")
-			feature.texture = load("res://assets/features/grass_hill.png")
-		globals.TileType.GRASS_MOUNTAIN:
-			texture = load("res://assets/hextiles/grassland.png")
-			feature.texture = load("res://assets/features/mountain.png")
-		globals.TileType.SAND:
-			texture = load("res://assets/hextiles/sand.png")
-			feature.texture = null
-		globals.TileType.SAND_HILL:
-			texture = load("res://assets/hextiles/sand.png")
-			feature.texture = load("res://assets/features/sand_hill.png")
-		globals.TileType.SAND_MOUNTAIN:
-			texture = load("res://assets/hextiles/sand.png")
-			feature.texture = load("res://assets/features/mountain.png")
-		globals.TileType.SNOW:
+			hill.texture = null
+			tree.texture = null
+#		Land-Based Tiles
+		TileType.SNOW:
 			texture = load("res://assets/hextiles/snow.png")
-			feature.texture = null
-		globals.TileType.SNOW_HILL:
+			hill.texture = null
+			tree.texture = null
+		TileType.SNOW_HILL:
 			texture = load("res://assets/hextiles/snow.png")
-			feature.texture = load("res://assets/features/snow_hill.png")
-		globals.TileType.SNOW_MOUNTAIN:
+			hill.texture = load("res://assets/hills/snow_hill_v2.png")
+			tree.texture = null
+		TileType.SNOW_MOUNTAIN:
 			texture = load("res://assets/hextiles/snow.png")
-			feature.texture = load("res://assets/features/mountain.png")
-		globals.TileType.TUNDRA:
+			hill.texture = load("res://assets/hills/mountain.png")
+			tree.texture = null
+		TileType.TUNDRA:
 			texture = load("res://assets/hextiles/tundra.png")
-			feature.texture = null
-		globals.TileType.NULL:
+			hill.texture = null
+			tree.texture = null
+		TileType.TUNDRA_HILL:
+			texture = load("res://assets/hextiles/tundra.png")
+			hill.texture = load("res://assets/hills/snow_hill_v2.png")
+			tree.texture = null
+		TileType.TAIGA:
+			texture = load("res://assets/hextiles/snow.png")
+			hill.texture = null
+			tree.texture = load("res://assets/trees/forest.png")
+		TileType.TAIGA_HILL:
+			texture = load("res://assets/hextiles/snow.png")
+			hill.texture = load("res://assets/hills/snow_hill_v2.png")
+			tree.texture = load("res://assets/trees/forest.png")
+		TileType.GRASS:
+			texture = load("res://assets/hextiles/grassland.png")
+			hill.texture = null
+			tree.texture = null
+		TileType.GRASS_HILL:
+			texture = load("res://assets/hextiles/grassland.png")
+			hill.texture = load("res://assets/hills/grass_hill.png")
+			tree.texture = null
+		TileType.GRASS_MOUNTAIN:
+			texture = load("res://assets/hextiles/grassland.png")
+			hill.texture = load("res://assets/hills/mountain.png")
+			tree.texture = null
+		TileType.FOREST:
+			texture = load("res://assets/hextiles/grassland.png")
+			hill.texture = null
+			tree.texture = load("res://assets/trees/forest.png")
+		TileType.FOREST_HILL:
+			texture = load("res://assets/hextiles/grassland.png")
+			hill.texture = load("res://assets/hills/grass_hill.png")
+			tree.texture = null
+		TileType.SWAMP:
+			texture = load("res://assets/hextiles/swamp.png")
+			hill.texture = null
+			tree.texture = load("res://assets/trees/willow.png")
+		TileType.SAND:
+			texture = load("res://assets/hextiles/sand.png")
+			hill.texture = null
+			tree.texture = null
+		TileType.SAND_HILL:
+			texture = load("res://assets/hextiles/sand.png")
+			hill.texture = load("res://assets/hills/sand_hill.png")
+			tree.texture = null
+		TileType.SAVANNAH:
+			texture = load("res://assets/hextiles/savannah.png")
+			hill.texture = null
+			tree.texture = load("res://assets/trees/acacia.png")
+		TileType.SAVANNAH_HILL:
+			texture = load("res://assets/hextiles/savannah.png")
+			hill.texture = load("res://assets/hills/sand_hill.png")
+			tree.texture = load("res://assets/trees/acacia.png")
+		TileType.JUNGLE:
+			texture = load("res://assets/hextiles/sand.png")
+			hill.texture = null
+			tree.texture = load("res://assets/trees/forest.png")
+		TileType.JUNGLE_HILL:
+			texture = load("res://assets/hextiles/sand.png")
+			hill.texture = load("res://assets/hills/sand_hill.png")
+			tree.texture = load("res://assets/trees/forest.png")
+		TileType.NULL:
 			texture = null
-			feature.texture = null
+			hill.texture = null
+			tree.texture = null
 		_:
 			texture = load("res://assets/hextiles/Purple tile.png")
-			feature.texture = null
-			print("Tile could not be found!")
+			hill.texture = null
+			tree.texture = null
 

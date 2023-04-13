@@ -5,6 +5,7 @@ extends Node
 @onready var map_size_node: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/MapSize/SpinBox
 @onready var tr_heightmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_heightmap
 @onready var tr_tempmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_tempmap
+@onready var tr_moistmap: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_moistmap
 @onready var tr_blendimage: TextureRect = $Camera2D/UI/VBC/HBC/Maps/VBoxContainer/tr_blendimage
 # Height Map vars
 @onready var deep_water_max: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/Deep/SpinBox
@@ -23,7 +24,6 @@ extends Node
 @onready var temp_fractal_type: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/FractalType2/SpinBox
 @onready var temp_freqeuncy_limit: SpinBox = $Camera2D/UI/VBC/HBC/PC/VBC/Frequency2/SpinBox
 
-@onready var globals = get_node("/root/Globals")
 @onready var hex_scene = preload("res://scenes/hex_tile.tscn")
 
 const max_size: int = 100
@@ -46,17 +46,29 @@ const max_size: int = 100
 @export_range(0,5) var temp_noise : int = 1
 @export_range(0,3) var temp_fractal : int = 3
 @export_range(1, 100) var temp_frequency : int = 5
+@export_group("Moisture Map Settings")
+@export_range(0,1) var dry: float = 0.3
+@export_range(0,1) var damp: float = 0.7
+@export_range(0,5) var moist_noise : int = 1
+@export_range(0,3) var moist_fractal : int = 3
+@export_range(1, 100) var moist_frequency : int = 5
 @export_group("Hexagon Settings")
 @export var tile_width: int = 126
 @export var tile_height: int = 144
 
-###
-# Create a pool of hextiles that are used to build the map and reused on generation
-# On map regen, compare map size to current hextiles
-# If greater, create new hextiles
-# If lesser, set excess tiles to null and [0,0]
-###
-
+enum TileType {
+			OCEAN_DEEP, OCEAN_MID, OCEAN_SHALLOW,
+			GRASS, GRASS_FLOWER, GRASS_HILL, GRASS_MOUNTAIN,
+			FOREST, FOREST_HILL,
+			SWAMP, 
+			SAND, SAND_HILL, 
+			SAVANNAH, SAVANNAH_HILL,
+			JUNGLE, JUNGLE_HILL,
+			SNOW, SNOW_HILL, SNOW_MOUNTAIN, 
+			TUNDRA, TUNDRA_HILL,
+			TAIGA, TAIGA_HILL,
+			NULL
+			}
 
 func _ready():
 	#Initial map generation
@@ -85,7 +97,8 @@ func GenerateNewMap(size: int):
 	lbl_seed.text = "Seed: " + str(seed)
 	var height_map: Image = await GenerateHeightMap(size, seed)
 	var temp_map: Image = await GenerateTemperatureMap(size, seed)
-	var world_map: Array = EvaluateWorldMap(height_map, temp_map, size)
+	var moist_map: Image = await GenerateMoistureMap(size, seed)
+	var world_map: Array = EvaluateWorldMap(height_map, temp_map, moist_map, size)
 	return world_map
 
 func GenerateHeightMap(size: int, seed: int):
@@ -99,13 +112,13 @@ func GenerateHeightMap(size: int, seed: int):
 	height_map.width = size
 	height_map.height = size
 	await height_map.changed
+	# Image Blending
 	var height_image: Image = height_map.get_image()
 	var blend_image: Image = tr_blendimage.texture.get_image()
 	blend_image.resize(size, size)
-	
 	height_image = BlendImage(height_image, blend_image, 2)
-	
 	tr_heightmap.texture = ImageTexture.create_from_image(height_image)
+	# Blended
 	return height_image
 	# ----- ||    Complete    || ----- #
 
@@ -125,76 +138,163 @@ func GenerateTemperatureMap(size: int, seed: int):
 	return temp_image
 	# ----- ||   Complete   || ----- #
 
-func EvaluateWorldMap(height_map: Image, temp_map: Image, size: int):
-	# ----- World Map ----- #
+func GenerateMoistureMap(size: int, seed: int):
+	# ----- || Gen Temp Map || ----- #
+	var moist_map = NoiseTexture2D.new()
+	moist_map.noise = FastNoiseLite.new()
+	moist_map.noise.seed = seed
+	moist_map.noise.set_noise_type(moist_noise)
+	moist_map.noise.set_fractal_type(moist_fractal)
+	moist_map.noise.set_frequency(moist_frequency/100.0)
+	moist_map.width = size
+	moist_map.height = size
+	await moist_map.changed
+	tr_moistmap.texture = moist_map
+	var moist_image = moist_map.get_image()
+	return moist_image
+	# ----- ||   Complete   || ----- #
+
+func EvaluateWorldMap(height_map: Image, temp_map: Image, moist_map: Image, size: int):
+#	Make World map
 	var world_map: Array = []
 	for x in range(size):
 		world_map.append([])
 		for y in range(size):
 			world_map[x].append(0)
-	# ----- | Done! | ----- #
 	
-	# ----- Evaluate World ----- #
-	var tile_type = globals.TileType.NULL
+#	Evaluate World Tiles
+	var height
+	var temp
+	var moist
+	var tile_type = TileType.NULL
 	for x in range(size):
 		for y in range(size):
-			var height = height_map.get_pixel(x, y).r
-			var temp = temp_map.get_pixel(x, y).r
-			if height < shallow_water:
-				tile_type = DetermineOceanBiome(height, temp)
-			else:
-				tile_type = DetermineLandBiome(height, temp)
-			world_map[x][y] = tile_type
-			
+			height = height_map.get_pixel(x, y).r
+			temp = temp_map.get_pixel(x, y).r
+			moist = moist_map.get_pixel(x, y).r
+			world_map[x][y] = GetTileType(height, temp, moist)
 	return world_map
-	# ----- |    Done    | ----- #
 
-func DetermineOceanBiome(height: float, temp: float):
-	# Determine ocean biome #
+# --- v New Tile Deciders v --- #
+
+func GetTileHeight(height: float):
+	var height_returned
 	if height < deep_water:
-		return globals.TileType.OCEAN_DEEP
+		height_returned = "deep_water"
 	elif height < mid_water:
-		return globals.TileType.OCEAN_MID
-	return globals.TileType.OCEAN_SHALLOW
+		height_returned = "mid_water"
+	elif height < shallow_water:
+		height_returned = "shallow_water"
+	elif height < hill:
+		height_returned = "low"
+	elif height < mountain:
+		height_returned = "mid"
+	else:
+		height_returned = "high"
+	return height_returned
 
-func DetermineLandBiome(height: float, temp: float):
-	# Determine land biome #
-	if temp < tundra:
-		return DetermineColdType(height, temp)
-	elif temp < grass:
-		return DetermineGrassType(height, temp)
-	return DetermineSandType(height, temp)
-
-func DetermineColdType(height: float, temp: float):
+func GetTileTemperature(temp: float):
+	var temperature_returned
 	if temp < snow:
-		return globals.TileType.SNOW
-	if height > mountain:
-		return globals.TileType.SNOW_MOUNTAIN
-	elif height > hill:
-		return globals.TileType.SNOW_HILL
-	return globals.TileType.TUNDRA
+		temperature_returned = "cold"
+	elif temp < grass:
+		temperature_returned = "warm"
+	else:
+		temperature_returned = "hot"
+	return temperature_returned
 
-func DetermineGrassType(height: float, temp: float):
-	if height > mountain:
-		return globals.TileType.GRASS_MOUNTAIN
-	elif height > hill:
-		return globals.TileType.GRASS_HILL
-	elif randi()%100 < flower_chance:
-		return globals.TileType.GRASS_FLOWER
-	return globals.TileType.GRASS
+func GetTileMoisture(moist: float):
+	var moisture_returned
+	if moist < dry:
+		moisture_returned = "dry"
+	elif moist < damp:
+		moisture_returned = "damp"
+	else:
+		moisture_returned = "wet"
+	return moisture_returned
 
-func DetermineSandType(height: float, temp: float):
-	if height > mountain:
-		return globals.TileType.SAND_MOUNTAIN
-	elif height > hill:
-		return globals.TileType.SAND_HILL
-	return globals.TileType.SAND
+func GetTileType(tile_height: float, tile_temp: float, tile_moist: float):
+	var height = GetTileHeight(tile_height)
+	var temp = GetTileTemperature(tile_temp)
+	var moist = GetTileMoisture(tile_moist)
+	var tile_type
+	var tile_string
+	match height:
+		"deep_water":
+			tile_type = TileType.OCEAN_DEEP
+		"mid_water":
+			tile_type = TileType.OCEAN_MID
+		"shallow_water":
+			tile_type = TileType.OCEAN_SHALLOW
+		_:
+			tile_string = temp + '_' + height + '_' + moist
+			match tile_string:
+#				Cold Tiles
+				"cold_low_wet":
+					tile_type = TileType.TAIGA
+				"cold_mid_wet":
+					tile_type = TileType.TAIGA_HILL
+				"cold_high_wet":
+					tile_type = TileType.SNOW_MOUNTAIN
+				"cold_low_damp":
+					tile_type = TileType.TUNDRA
+				"cold_mid_damp":
+					tile_type = TileType.TUNDRA_HILL
+				"cold_high_damp":
+					tile_type = TileType.SNOW_MOUNTAIN
+				"cold_low_dry":
+					tile_type = TileType.SNOW
+				"cold_mid_dry":
+					tile_type = TileType.SNOW_HILL
+				"cold_high_dry":
+					tile_type = TileType.SNOW_MOUNTAIN
+#				Warm Tiles
+				"warm_low_wet":
+					tile_type = TileType.SWAMP
+				"warm_mid_wet":
+					tile_type = TileType.SWAMP
+				"warm_high_wet":
+					tile_type = TileType.GRASS_MOUNTAIN
+				"warm_low_damp":
+					tile_type = TileType.FOREST
+				"warm_mid_damp":
+					tile_type = TileType.FOREST_HILL
+				"warm_high_damp":
+					tile_type = TileType.GRASS_MOUNTAIN
+				"warm_low_dry":
+					tile_type = TileType.GRASS
+				"warm_mid_dry":
+					tile_type = TileType.GRASS_HILL
+				"warm_high_dry":
+					tile_type = TileType.GRASS_MOUNTAIN
+#				Hot Tiles
+				"hot_low_wet":
+					tile_type = TileType.JUNGLE
+				"hot_mid_wet":
+					tile_type = TileType.JUNGLE_HILL
+				"hot_high_wet":
+					tile_type = TileType.JUNGLE_HILL
+				"hot_low_damp":
+					tile_type = TileType.SAVANNAH
+				"hot_mid_damp":
+					tile_type = TileType.SAVANNAH_HILL
+				"hot_high_damp":
+					tile_type = TileType.SAVANNAH_HILL
+				"hot_low_dry":
+					tile_type = TileType.SAND
+				"hot_mid_dry":
+					tile_type = TileType.SAND_HILL
+				"hot_high_dry":
+					tile_type = TileType.SAND_HILL
+	return tile_type
+
+# --- ^ New Tile Deciders ^ --- #
 
 func SetMap(world_map: Array):
 	var index = 0
 	for x in range(world_map.size()):
 		for y in range(world_map.size()):
-			map_node.get_child(index).SetTile(world_map[x][y], globals)
+			map_node.get_child(index).SetTile(world_map[x][y], TileType)
 			index += 1
 		index += (max_size - world_map.size())
 
@@ -213,7 +313,7 @@ func ClearMap():
 	# Clear map by setting all tiles to null
 	# This makes them recognised as "useless"
 	for i in range(map_node.get_child_count()):
-		map_node.get_child(i).SetTile(globals.TileType.NULL, globals)
+		map_node.get_child(i).SetTile(TileType.NULL, TileType)
 
 func BlendImage(image1: Image, image2: Image, weight: int):
 	# Merges image1 and image2 with a weight towards image2
