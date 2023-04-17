@@ -1,0 +1,412 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ep4amjhek2n"]
+
+[ext_resource type="Script" path="res://scripts/ui_scripts/map_ui.gd" id="1_paow7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_evxew"]
+
+[node name="MapUI" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_paow7")
+
+[node name="ml" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="c" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="tc" type="TabContainer" parent="c"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Height" type="VBoxContainer" parent="c/tc"]
+layout_mode = 2
+
+[node name="NoiseType" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/NoiseType"]
+layout_mode = 2
+text = "Noise Type"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/NoiseType"]
+layout_mode = 2
+max_value = 5.0
+value = 1.0
+scrollable = false
+tick_count = 6
+ticks_on_borders = true
+
+[node name="FractalType" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/FractalType"]
+layout_mode = 2
+text = "Fractal Type"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/FractalType"]
+layout_mode = 2
+max_value = 3.0
+value = 1.0
+scrollable = false
+tick_count = 4
+ticks_on_borders = true
+
+[node name="NoiseFrequency" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/NoiseFrequency"]
+layout_mode = 2
+text = "Noise Frequency"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/NoiseFrequency"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="MaxDeep" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/MaxDeep"]
+layout_mode = 2
+text = "Deep Water Max Height"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/MaxDeep"]
+layout_mode = 2
+value = 10.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="MaxMid" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/MaxMid"]
+layout_mode = 2
+text = "Mid Water Max Height"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/MaxMid"]
+layout_mode = 2
+value = 20.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="MaxShallow" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/MaxShallow"]
+layout_mode = 2
+text = "Shallow Water Max Height"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/MaxShallow"]
+layout_mode = 2
+value = 30.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="MaxFlatLand" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/MaxFlatLand"]
+layout_mode = 2
+text = "Flat Land Max Height"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/MaxFlatLand"]
+layout_mode = 2
+value = 70.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="MaxHill" type="VBoxContainer" parent="c/tc/Height"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Height/MaxHill"]
+layout_mode = 2
+text = "Hills Max Height"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Height/MaxHill"]
+layout_mode = 2
+value = 85.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="Temp" type="VBoxContainer" parent="c/tc"]
+visible = false
+layout_mode = 2
+
+[node name="NoiseType" type="VBoxContainer" parent="c/tc/Temp"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Temp/NoiseType"]
+layout_mode = 2
+text = "Noise Type"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Temp/NoiseType"]
+layout_mode = 2
+max_value = 5.0
+value = 1.0
+scrollable = false
+tick_count = 6
+ticks_on_borders = true
+
+[node name="FractalType" type="VBoxContainer" parent="c/tc/Temp"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Temp/FractalType"]
+layout_mode = 2
+text = "Fractal Type"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Temp/FractalType"]
+layout_mode = 2
+max_value = 3.0
+value = 1.0
+scrollable = false
+tick_count = 4
+ticks_on_borders = true
+
+[node name="NoiseFrequency" type="VBoxContainer" parent="c/tc/Temp"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Temp/NoiseFrequency"]
+layout_mode = 2
+text = "Noise Frequency"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Temp/NoiseFrequency"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="MaxSnow" type="VBoxContainer" parent="c/tc/Temp"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Temp/MaxSnow"]
+layout_mode = 2
+text = "Snow Max Temp"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Temp/MaxSnow"]
+layout_mode = 2
+value = 40.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="MaxGrass" type="VBoxContainer" parent="c/tc/Temp"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Temp/MaxGrass"]
+layout_mode = 2
+text = "Grass Max Temp"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Temp/MaxGrass"]
+layout_mode = 2
+value = 40.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="Moisture" type="VBoxContainer" parent="c/tc"]
+visible = false
+layout_mode = 2
+
+[node name="NoiseType" type="VBoxContainer" parent="c/tc/Moisture"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Moisture/NoiseType"]
+layout_mode = 2
+text = "Noise Type"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Moisture/NoiseType"]
+layout_mode = 2
+max_value = 5.0
+value = 1.0
+scrollable = false
+tick_count = 6
+ticks_on_borders = true
+
+[node name="FractalType" type="VBoxContainer" parent="c/tc/Moisture"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Moisture/FractalType"]
+layout_mode = 2
+text = "Fractal Type"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Moisture/FractalType"]
+layout_mode = 2
+max_value = 3.0
+value = 1.0
+scrollable = false
+tick_count = 4
+ticks_on_borders = true
+
+[node name="NoiseFrequency" type="VBoxContainer" parent="c/tc/Moisture"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Moisture/NoiseFrequency"]
+layout_mode = 2
+text = "Noise Frequency"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Moisture/NoiseFrequency"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+
+[node name="MaxDry" type="VBoxContainer" parent="c/tc/Moisture"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Moisture/MaxDry"]
+layout_mode = 2
+text = "Dry Max Moisture"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Moisture/MaxDry"]
+layout_mode = 2
+value = 40.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="MaxDamp" type="VBoxContainer" parent="c/tc/Moisture"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/tc/Moisture/MaxDamp"]
+layout_mode = 2
+text = "Damp Max Moisture"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/tc/Moisture/MaxDamp"]
+layout_mode = 2
+value = 40.0
+scrollable = false
+tick_count = 2
+ticks_on_borders = true
+
+[node name="mm" type="MarginContainer" parent="c"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="pc" type="PanelContainer" parent="c"]
+layout_mode = 2
+
+[node name="MapSize" type="VBoxContainer" parent="c/pc"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="field_name" type="Label" parent="c/pc/MapSize"]
+layout_mode = 2
+text = "Map Size"
+horizontal_alignment = 1
+
+[node name="slider" type="HSlider" parent="c/pc/MapSize"]
+layout_mode = 2
+min_value = 10.0
+step = 10.0
+value = 50.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="btnGenerate" type="Button" parent="c"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 8
+text = "Generate"
+
+[node name="bm" type="MarginContainer" parent="c"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="mm" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="c2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="tc" type="TabContainer" parent="c2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Height" type="VBoxContainer" parent="c2/tc"]
+layout_mode = 2
+
+[node name="noise_image" type="TextureRect" parent="c2/tc/Height"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_evxew")
+expand_mode = 4
+
+[node name="Temp" type="VBoxContainer" parent="c2/tc"]
+visible = false
+layout_mode = 2
+
+[node name="noise_image" type="TextureRect" parent="c2/tc/Temp"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_evxew")
+expand_mode = 4
+
+[node name="Moisture" type="VBoxContainer" parent="c2/tc"]
+visible = false
+layout_mode = 2
+
+[node name="noise_image" type="TextureRect" parent="c2/tc/Moisture"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_evxew")
+expand_mode = 4
+
+[node name="mr" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="c/btnGenerate" to="." method="_on_btn_generate_pressed"]
