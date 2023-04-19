@@ -225,7 +225,7 @@ horizontal_alignment = 1
 
 [node name="slider" type="HSlider" parent="c/tc/Temp/MaxSnow"]
 layout_mode = 2
-value = 40.0
+value = 20.0
 scrollable = false
 tick_count = 2
 ticks_on_borders = true
@@ -241,7 +241,7 @@ horizontal_alignment = 1
 
 [node name="slider" type="HSlider" parent="c/tc/Temp/MaxGrass"]
 layout_mode = 2
-value = 40.0
+value = 70.0
 scrollable = false
 tick_count = 2
 ticks_on_borders = true
@@ -313,7 +313,7 @@ horizontal_alignment = 1
 
 [node name="slider" type="HSlider" parent="c/tc/Moisture/MaxDry"]
 layout_mode = 2
-value = 40.0
+value = 50.0
 scrollable = false
 tick_count = 2
 ticks_on_borders = true
@@ -329,7 +329,7 @@ horizontal_alignment = 1
 
 [node name="slider" type="HSlider" parent="c/tc/Moisture/MaxDamp"]
 layout_mode = 2
-value = 40.0
+value = 80.0
 scrollable = false
 tick_count = 2
 ticks_on_borders = true
@@ -354,7 +354,7 @@ horizontal_alignment = 1
 layout_mode = 2
 min_value = 10.0
 step = 10.0
-value = 50.0
+value = 10.0
 tick_count = 10
 ticks_on_borders = true
 
@@ -383,6 +383,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="noise_image" type="TextureRect" parent="c2/tc/Height"]
+texture_filter = 1
 layout_mode = 2
 texture = SubResource("NoiseTexture2D_evxew")
 expand_mode = 4
@@ -392,6 +393,7 @@ visible = false
 layout_mode = 2
 
 [node name="noise_image" type="TextureRect" parent="c2/tc/Temp"]
+texture_filter = 1
 layout_mode = 2
 texture = SubResource("NoiseTexture2D_evxew")
 expand_mode = 4
@@ -401,6 +403,7 @@ visible = false
 layout_mode = 2
 
 [node name="noise_image" type="TextureRect" parent="c2/tc/Moisture"]
+texture_filter = 1
 layout_mode = 2
 texture = SubResource("NoiseTexture2D_evxew")
 expand_mode = 4

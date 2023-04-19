@@ -2,9 +2,15 @@ extends Sprite2D
 
 @onready var hill: Sprite2D = $hill
 @onready var tree: Sprite2D = $tree
+@onready var area: Area2D = $Area2D
 var neighbours = []
+var type
+
+signal tile_selected
 
 func SetTile(tile_type, TileType):
+	type = tile_type
+	area.monitoring = true
 	# Assign unique attributes to each biome type
 	match tile_type:
 #		Water-Based Tiles
@@ -90,19 +96,28 @@ func SetTile(tile_type, TileType):
 			hill.texture = load("res://assets/hills/sand_hill.png")
 			tree.texture = load("res://assets/trees/acacia.png")
 		TileType.JUNGLE:
-			texture = load("res://assets/hextiles/sand.png")
+			texture = load("res://assets/hextiles/jungle.png")
 			hill.texture = null
-			tree.texture = load("res://assets/trees/forest.png")
+			tree.texture = load("res://assets/trees/jungle_tree.png")
 		TileType.JUNGLE_HILL:
-			texture = load("res://assets/hextiles/sand.png")
-			hill.texture = load("res://assets/hills/sand_hill.png")
-			tree.texture = load("res://assets/trees/forest.png")
+			texture = load("res://assets/hextiles/jungle.png")
+			hill.texture = load("res://assets/hills/grass_hill.png")
+			tree.texture = load("res://assets/trees/jungle_tree.png")
 		TileType.NULL:
 			texture = null
 			hill.texture = null
 			tree.texture = null
+			area.monitoring = true
 		_:
 			texture = load("res://assets/hextiles/Purple tile.png")
 			hill.texture = null
 			tree.texture = null
+			area.monitoring = true
 
+func SetNeighbours(nbrs):
+	neighbours = nbrs
+
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		tile_selected.emit(self)

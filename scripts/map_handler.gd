@@ -1,7 +1,9 @@
 extends Node
 
 @onready var map_node = $MapNode
+@onready var connections = $Connections
 @onready var map_ui = $UILayer/MapUI
+@onready var camera = $Camera
 
 @onready var hex_scene = preload("res://scenes/HexTile.tscn")
 @export var map_scale : float = 0.5
@@ -10,7 +12,8 @@ extends Node
 @export var tile_width: int = 126
 @export var tile_height: int = 144
 
-const max_size = 100
+const max_size = 102
+var resolution
 
 enum TileType {
 			OCEAN_DEEP, OCEAN_MID, OCEAN_SHALLOW,
@@ -28,19 +31,25 @@ enum TileType {
 
 func _ready():
 	#Initial map generation
-	SetUpTiles(100)
+	SetUpTiles(max_size)
 	InitialiseMap(map_ui.GetMapSize())
 
 func SetUpTiles(size: int):
-	for i in range(size*size):
-		var new_tile = hex_scene.instantiate()
-		new_tile.position = Vector2(0, 0)
-		map_node.add_child(new_tile)
+	for y in range(size):
+		for x in range(size):
+			var delta_x: int = (tile_width * x) + (tile_width/2 * (y%2))
+			var delta_y: int = (tile_height/1.3 * y)
+			var pos = Vector2(delta_x, delta_y)
+			var new_tile = hex_scene.instantiate()
+			new_tile.position = pos
+			map_node.add_child(new_tile)
+			new_tile.SetTile(TileType.NULL, TileType)
+			new_tile.connect("tile_selected", _on_tile_selected)
 
 func InitialiseMap(size: int):
 	var world_map = await GenerateNewMap(size)
 	SetMap(world_map)
-	DrawMap()
+	SetTileNeighbours(world_map)
 	map_node.scale = Vector2(map_scale, map_scale)
 
 func GenerateNewMap(size: int):
@@ -238,12 +247,55 @@ func GetTileType(tile_height: float, tile_temp: float, tile_moist: float):
 	return tile_type
 
 func SetMap(world_map: Array):
-	var index = 0
+	var index = max_size + 1
+	var v_offset = (max_size - world_map.size())
 	for x in range(world_map.size()):
 		for y in range(world_map.size()):
 			map_node.get_child(index).SetTile(world_map[x][y], TileType)
 			index += 1
-		index += (max_size - world_map.size())
+		index += v_offset
+
+func SetTileNeighbours(world_map: Array):
+	# Gets neighbour tiles for tile
+	var index = max_size + 1
+	var v_offset = (max_size - world_map.size())
+	var nbrs = [null, null, null, null, null, null]
+	var neighbours = []
+	var tile; var offset
+	var max = max_size*max_size
+	for x in range(world_map.size()):
+		for y in range(world_map.size()):
+			neighbours = []
+			tile = map_node.get_child(index)
+			offset = (x%2)*1
+			nbrs[0] = GetNeighbour(world_map, clamp(index-1, 0, max)) # W
+			nbrs[1] = GetNeighbour(world_map, clamp(index+1, 0, max)) # E
+			nbrs[2] = GetNeighbour(world_map, clamp(index-max_size+1-offset, 0, max)) # NW
+			nbrs[3] = GetNeighbour(world_map, clamp(index-max_size-offset, 0, max)) # NE
+			nbrs[4] = GetNeighbour(world_map, clamp(index+max_size-offset, 0, max)) # SW
+			nbrs[5] = GetNeighbour(world_map, clamp(index+max_size+1-offset, 0, max)) # SE
+			for nbr in nbrs:
+				if nbr != tile and nbr != null and nbr.type != TileType.NULL:
+					neighbours.append(nbr)
+			tile.SetNeighbours(neighbours)
+			index += 1
+		index += v_offset
+
+func GetNeighbour(world_map, index):
+	var tile = map_node.get_child(index)
+	if tile:
+		return tile
+
+func ConnectNeighbours(tile):
+	for child in connections.get_children():
+		connections.remove_child(child)
+	var line
+	for nbr in tile.neighbours:
+		line = Line2D.new()
+		line.add_point(tile.position * map_scale)
+		line.add_point(nbr.position * map_scale)
+		line.default_color = Color(1 * randf(), 1 * randf(), 1 * randf(), 0.75)
+		connections.add_child(line)
 
 func DrawMap():
 	var size = sqrt(map_node.get_child_count())
@@ -274,4 +326,8 @@ func BlendImage(image1: Image, image2: Image, weight: int):
 
 # Connected Signals
 func _on_map_ui_generate():
+	ClearMap()
 	InitialiseMap(map_ui.GetMapSize())
+
+func _on_tile_selected(tile):
+	ConnectNeighbours(tile)

@@ -8,3 +8,11 @@ script = ExtResource("1_v8dnl")
 [node name="hill" type="Sprite2D" parent="."]
 
 [node name="tree" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-65, -48, 0, -81, 65, -48, 65, 31, 0, 65, -65, 31)
+
+[connection signal="input_event" from="Area2D" to="." method="_on_input_event"]
