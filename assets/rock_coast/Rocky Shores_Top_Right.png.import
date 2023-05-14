@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx1naje3qh7hy"
-path="res://.godot/imported/savannah.png-541f8f6850a19478b1165936a562336c.ctex"
+uid="uid://w7q22db27k2a"
+path="res://.godot/imported/Rocky Shores_Top_Right.png-0430ad7f84b66192a364aa3cf964c753.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/savannah.png"
-dest_files=["res://.godot/imported/savannah.png-541f8f6850a19478b1165936a562336c.ctex"]
+source_file="res://assets/rock_coast/Rocky Shores_Top_Right.png"
+dest_files=["res://.godot/imported/Rocky Shores_Top_Right.png-0430ad7f84b66192a364aa3cf964c753.ctex"]
 
 [params]
 

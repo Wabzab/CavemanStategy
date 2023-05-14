@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi8gmuvofmub2"
-path="res://.godot/imported/grassland.png-d8132569272c2ca442d2e6d6a29ded61.ctex"
+uid="uid://cgfp4gmf5ujp3"
+path="res://.godot/imported/border.png-b2dddf9b918563ff5cfa03c24a3efd1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/grassland.png"
-dest_files=["res://.godot/imported/grassland.png-d8132569272c2ca442d2e6d6a29ded61.ctex"]
+source_file="res://assets/imports/border.png"
+dest_files=["res://.godot/imported/border.png-b2dddf9b918563ff5cfa03c24a3efd1c.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

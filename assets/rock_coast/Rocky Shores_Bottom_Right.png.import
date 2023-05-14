@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8yiumdhob8p"
-path="res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"
+uid="uid://ctkwildclkq5y"
+path="res://.godot/imported/Rocky Shores_Bottom_Right.png-bd3d42d0e1a86301b3d9e0c91e865c6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/snow.png"
-dest_files=["res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"]
+source_file="res://assets/rock_coast/Rocky Shores_Bottom_Right.png"
+dest_files=["res://.godot/imported/Rocky Shores_Bottom_Right.png-bd3d42d0e1a86301b3d9e0c91e865c6c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8yiumdhob8p"
-path="res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"
+uid="uid://cojqrxja687dp"
+path="res://.godot/imported/biome_lookup.png-8ff3df59decca72eeccecbf9766e290d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/snow.png"
-dest_files=["res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"]
+source_file="res://assets/biome_lookup.png"
+dest_files=["res://.godot/imported/biome_lookup.png-8ff3df59decca72eeccecbf9766e290d.ctex"]
 
 [params]
 

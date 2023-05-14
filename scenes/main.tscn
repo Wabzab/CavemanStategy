@@ -15,6 +15,7 @@ map_scale = 1.0
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_a2php")
 speed = 20
+min_zoom = 0.1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 

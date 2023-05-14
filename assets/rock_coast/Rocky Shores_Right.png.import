@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0g6flmsygbkp"
-path="res://.godot/imported/ocean_shallow.png-638d115e7c1007c01500b96e7a18da42.ctex"
+uid="uid://bmwym02sgig4"
+path="res://.godot/imported/Rocky Shores_Right.png-2eec24811ab15cccb22f89f0cb481425.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/ocean_shallow.png"
-dest_files=["res://.godot/imported/ocean_shallow.png-638d115e7c1007c01500b96e7a18da42.ctex"]
+source_file="res://assets/rock_coast/Rocky Shores_Right.png"
+dest_files=["res://.godot/imported/Rocky Shores_Right.png-2eec24811ab15cccb22f89f0cb481425.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

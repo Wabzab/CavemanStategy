@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbcc0cl0m0uvv"
-path="res://.godot/imported/ocean_mid.png-4492e42a304afdf014328162c756c31a.ctex"
+uid="uid://csmfrtfx5dxfm"
+path="res://.godot/imported/grass.png-a20ca448844e19bead57134ad92ab410.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/ocean_mid.png"
-dest_files=["res://.godot/imported/ocean_mid.png-4492e42a304afdf014328162c756c31a.ctex"]
+source_file="res://assets/hextiles/grass.png"
+dest_files=["res://.godot/imported/grass.png-a20ca448844e19bead57134ad92ab410.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

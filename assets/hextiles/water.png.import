@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8yiumdhob8p"
-path="res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"
+uid="uid://dbcc0cl0m0uvv"
+path="res://.godot/imported/water.png-31733b41c35e08d2ee001eafd7bb5e53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/snow.png"
-dest_files=["res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"]
+source_file="res://assets/hextiles/water.png"
+dest_files=["res://.godot/imported/water.png-31733b41c35e08d2ee001eafd7bb5e53.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

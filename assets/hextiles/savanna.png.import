@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8yiumdhob8p"
-path="res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"
+uid="uid://d1lf4kfsvgbsc"
+path="res://.godot/imported/savanna.png-5e25edb747212c24e46b7d94a2e85fdc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hextiles/snow.png"
-dest_files=["res://.godot/imported/snow.png-501d8e1b137744e3a13a8739f15ea0e0.ctex"]
+source_file="res://assets/hextiles/savanna.png"
+dest_files=["res://.godot/imported/savanna.png-5e25edb747212c24e46b7d94a2e85fdc.ctex"]
 
 [params]
 
