@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3ep4amjhek2n"]
+[gd_scene load_steps=3 format=3 uid="uid://bmv8d51uw1qaa"]
 
-[ext_resource type="Script" path="res://scripts/ui_scripts/map_ui.gd" id="1_paow7"]
+[ext_resource type="Script" path="res://scripts/ui/map_ui.gd" id="1_0pjbv"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_evxew"]
 
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_paow7")
+script = ExtResource("1_0pjbv")
 
 [node name="ml" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(80, 0)

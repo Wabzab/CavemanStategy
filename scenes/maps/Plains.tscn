@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://is0nmvox3wss"]
+
+[ext_resource type="Script" path="res://scripts/maps/plains.gd" id="1_acb6k"]
+[ext_resource type="Resource" uid="uid://du4stovi1o0ww" path="res://resources/biomes/grass.tres" id="2_aomih"]
+[ext_resource type="PackedScene" uid="uid://dq2xavma5l86h" path="res://scenes/tiles/Land.tscn" id="2_ku3os"]
+[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="4_16vtm"]
+
+[node name="plains" type="Node2D"]
+script = ExtResource("1_acb6k")
+map_size = 10
+land_tile = ExtResource("2_ku3os")
+biome_data = ExtResource("2_aomih")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_16vtm")
+speed = 20
+max_zoom = 5.0
