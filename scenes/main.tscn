@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/map_handler.gd" id="1_iiv2i"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="2_a2php"]
-[ext_resource type="PackedScene" uid="uid://bmv8d51uw1qaa" path="res://scenes/MapUI.tscn" id="3_8spxr"]
+[ext_resource type="PackedScene" uid="uid://c3ep4amjhek2n" path="res://scenes/MapUI.tscn" id="3_8spxr"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iiv2i")

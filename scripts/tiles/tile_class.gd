@@ -1,33 +1,35 @@
 extends Node2D
 class_name TileClass
 
-@export var tile_width: int = 100
-@export var tile_height: int = 100
-@export var base: Sprite2D = Sprite2D.new()
+@export var tile_width: int = 304
+@export var tile_height: int = 304
 @export var features: Node2D = Node2D.new()
 
-var polygon = [
-	Vector2(0, -160),
-	Vector2(127, -96),
-	Vector2(127, 67),
-	Vector2(0, 127),
-	Vector2(-127, 67),
-	Vector2(-127, -96),
-]
+var layer = 0
+var ramp = false
+
+
+func _init(layer_in: int, ramp_in: bool):
+	layer = layer_in
+	ramp = ramp_in
+
 
 func _ready():
-	self.add_child(base)
 	self.add_child(features)
 	_update()
+
 
 func _update():
 	pass
 
-func _set_tile(p_position: Vector2, p_texture: Texture2D):
-	self.position = p_position
-	base.texture = p_texture
 
-func _add_feature(new_feature: Resource):
+func add_feature(new_feature: PackedScene):
 	var feature = new_feature.instantiate()
-	feature.spread_objects(polygon, [Vector2(-127, -160), Vector2(127, 127)])
+	feature.spread_objects()
 	features.add_child(feature)
+
+
+func get_layer(): return layer
+
+
+func is_ramp(): return ramp

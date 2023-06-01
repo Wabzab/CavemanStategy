@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci0em5bgqjkoi"]
+
+[ext_resource type="Script" path="res://scripts/resource/tree.gd" id="1_vsghk"]
+
+[node name="Tree" type="Node2D"]
+script = ExtResource("1_vsghk")
