@@ -1,10 +1,12 @@
 extends MapClass
 
 
-@export var rage = 0
+@export var rage = 09
 
-var low  = 0.45
-var ramp = 0.55
+@onready var txrRect = $TextureRect
+
+var low  = 0.49
+var ramp = 0.51
 #   high = 1.0
 
 
@@ -13,12 +15,19 @@ func fuzz_image():
 
 
 func init_tile(x: int, y: int):
-	var height = image.get_pixel(x, y).r
+	#var noise_image = noise.noise.get_image(image.get_width(), image.get_height(), false, false, true)
+	#var height = noise_image.get_pixel(x, y).r
+	var height = 1-image.get_pixel(x, y).r
 	var tile = land_tile.instantiate()
-	tile.init(1, false)
 	if height <= low:
-		tile.init(0, false)
-	if height <= ramp:
-		tile.init(1, true)
+		tile.set_layer(1)
+	elif height <= ramp:
+		tile.set_layer(0)
+		tile.set_ramp(true)
+	else:
+		tile.set_layer(0)
 	return tile
 
+
+func update():
+	txrRect.texture = get_image()

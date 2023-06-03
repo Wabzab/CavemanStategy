@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpv1u3wlorvp5"]
+
+[ext_resource type="Texture2D" uid="uid://bs80ge7pjs1n7" path="res://assets/cliffs/rocky_cliffs_horizontal.png" id="1_piiaw"]
+
+[node name="GrassCliffTop" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_piiaw")
+offset = Vector2(0, -152)
+flip_v = true
