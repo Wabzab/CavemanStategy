@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://oumka740dus5"]
+
+[ext_resource type="Script" path="res://scripts/features/grass.gd" id="1_qkbue"]
+[ext_resource type="Texture2D" uid="uid://cc3rfyg8qbryn" path="res://assets/features/grass/grass_1.png" id="2_mrtbt"]
+
+[node name="Grass" type="Node2D"]
+script = ExtResource("1_qkbue")
+total = 5
+radius = 25
+resources = [ExtResource("2_mrtbt")]

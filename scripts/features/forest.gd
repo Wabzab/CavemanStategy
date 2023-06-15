@@ -1,17 +1,24 @@
 extends Feature
 
 
-func spread_objects(polygon, bounds):
+func spread_resource(bounds):
 	var others = []
-	while others.size() <= total:
-		var object = objects.pick_random()
-		var x = randi_range(bounds[0].x, bounds[1].x)
-		var y = randi_range(bounds[0].y, bounds[1].y)
-		var point = Vector2(x, y)
-		if !Geometry2D.is_point_in_polygon(point, polygon) or is_overlapping(point, radius, others):
+	var fails = 0
+	while others.size() < total or fails > 100:
+		var half_x = bounds.x/2
+		var half_y = bounds.y/2
+		var x = randi_range(-half_x+radius, half_x-radius)
+		var y = randi_range(-half_y+radius, half_y-radius)
+		var position = Vector2(x, y)
+		if is_overlapping(position, radius, others):
+			fails += 1
 			continue
-		var sprite = Sprite2D.new()
-		sprite.texture = object
-		sprite.position = point
-		others.append(sprite)
-		self.add_child(sprite)
+		var texture: Texture2D = resources.pick_random()
+		var new_res = Sprite2D.new()
+		new_res.z_index = 1
+		#new_res.offset.y = -texture.get_height()+10
+		new_res.texture = texture
+		new_res.position = position
+		others.append(new_res)
+		print(new_res.global_position, new_res.position)
+		add_child(new_res)

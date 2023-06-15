@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://m7bvcpmhxxn7"]
+[gd_scene load_steps=4 format=3 uid="uid://c7latfe6f5hjw"]
 
 [ext_resource type="Script" path="res://scripts/features/rocks.gd" id="1_4nlfd"]
+[ext_resource type="Texture2D" uid="uid://b03ojdpltfg3s" path="res://assets/features/rocks/Rock_Sprite_1.png" id="2_cpjdv"]
+[ext_resource type="Texture2D" uid="uid://bmv2jff3quitn" path="res://assets/features/rocks/Rock_Sprite_2.png" id="3_iy35h"]
 
 [node name="Rock" type="Node2D"]
 script = ExtResource("1_4nlfd")
+total = 2
+radius = 25
+resources = [ExtResource("2_cpjdv"), ExtResource("3_iy35h")]

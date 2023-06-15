@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck8mlq82g2m7p"]
+[gd_scene load_steps=5 format=3 uid="uid://1lawnin622ol"]
 
 [ext_resource type="Script" path="res://scripts/features/forest.gd" id="1_itp78"]
+[ext_resource type="Texture2D" uid="uid://byl00864ao8ia" path="res://assets/features/trees/Tree_Sprite_1.png" id="2_4024e"]
+[ext_resource type="Texture2D" uid="uid://ger3gqcais8m" path="res://assets/features/trees/Tree_Sprite_2.png" id="3_q1cbp"]
+[ext_resource type="Texture2D" uid="uid://b055uc7qwghmv" path="res://assets/features/trees/Tree_Sprite_3.png" id="4_frkbn"]
 
 [node name="Forest" type="Node2D"]
 script = ExtResource("1_itp78")
+total = 5
+radius = 25
+resources = [ExtResource("2_4024e"), ExtResource("3_q1cbp"), ExtResource("4_frkbn")]

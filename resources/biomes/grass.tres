@@ -1,12 +1,13 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://du4stovi1o0ww"]
+[gd_resource type="Resource" load_steps=11 format=3 uid="uid://du4stovi1o0ww"]
 
 [ext_resource type="Texture2D" uid="uid://ca53qx23ctyna" path="res://assets/tiles/grass_tile_main_elavation.png" id="1_60fh4"]
 [ext_resource type="PackedScene" uid="uid://bnxpuathhinkn" path="res://scenes/cliffs/grass/Bottom.tscn" id="1_e66k2"]
 [ext_resource type="Script" path="res://resources/biomes/biome_data.gd" id="1_xangd"]
-[ext_resource type="PackedScene" uid="uid://ck8mlq82g2m7p" path="res://scenes/features/Forest.tscn" id="2_cqney"]
+[ext_resource type="PackedScene" path="res://scenes/features/Forest.tscn" id="2_cqney"]
 [ext_resource type="Texture2D" uid="uid://eo78qc24n33m" path="res://assets/tiles/grass_tile_main.png" id="3_g7mak"]
-[ext_resource type="PackedScene" uid="uid://m7bvcpmhxxn7" path="res://scenes/features/Rock.tscn" id="4_b50nw"]
+[ext_resource type="PackedScene" path="res://scenes/features/Rock.tscn" id="4_b50nw"]
 [ext_resource type="PackedScene" uid="uid://dk1l4vgfvi4ao" path="res://scenes/cliffs/grass/Left.tscn" id="4_cyacc"]
+[ext_resource type="PackedScene" uid="uid://oumka740dus5" path="res://scenes/features/Grass.tscn" id="4_jc7eo"]
 [ext_resource type="PackedScene" uid="uid://ddjexen78u4v6" path="res://scenes/cliffs/grass/Right.tscn" id="5_ujicx"]
 [ext_resource type="PackedScene" uid="uid://cpv1u3wlorvp5" path="res://scenes/cliffs/grass/Top.tscn" id="8_elif5"]
 
@@ -20,3 +21,4 @@ top_cliff = ExtResource("8_elif5")
 bottom_cliff = ExtResource("1_e66k2")
 forest_feature = ExtResource("2_cqney")
 rock_feature = ExtResource("4_b50nw")
+grass_feature = ExtResource("4_jc7eo")

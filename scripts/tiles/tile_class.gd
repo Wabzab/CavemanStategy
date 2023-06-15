@@ -18,6 +18,8 @@ func init(layer_in: int, ramp_in: bool):
 
 
 func _ready():
+	# Minimum integar = -2^63
+	base.z_index = -2^63
 	self.add_child(base)
 	self.add_child(cliffs)
 	self.add_child(features)
@@ -28,8 +30,8 @@ func update():
 
 
 func add_feature(new_feature: PackedScene):
-	var feature = new_feature.instantiate()
-	feature.spread_objects()
+	var feature: Feature = new_feature.instantiate()
+	feature.spread_resource(rect.size)
 	features.add_child(feature)
 
 

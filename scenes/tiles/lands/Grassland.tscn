@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckdfpujwpdkg6"]
-
-[ext_resource type="Script" path="res://scripts/tiles/grass.gd" id="1_yrg71"]
-[ext_resource type="Texture2D" uid="uid://cc3rfyg8qbryn" path="res://assets/features/grass/grass_1.png" id="2_igcrq"]
-
-[node name="Grassland" type="Node2D"]
-script = ExtResource("1_yrg71")
-textures = [ExtResource("2_igcrq")]

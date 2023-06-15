@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvjedwyqrge0c"]
-
-[ext_resource type="Texture2D" uid="uid://ca53qx23ctyna" path="res://assets/tiles/grass_tile_main_elavation.png" id="1_wkb10"]
-
-[node name="Grasscliff" type="Node2D"]
-
-[node name="base" type="Sprite2D" parent="."]
-texture = ExtResource("1_wkb10")

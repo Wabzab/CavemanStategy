@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgar8lgd8b3gv"
-path="res://.godot/imported/cliff_grass.png-a0c9d5e12edaaf7ee404493ca52e7e7f.ctex"
+uid="uid://b03ojdpltfg3s"
+path="res://.godot/imported/Rock_Sprite_1.png-b55e329bd075dd601aa5ac4ae47a5d91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imports/cliff_grass.png"
-dest_files=["res://.godot/imported/cliff_grass.png-a0c9d5e12edaaf7ee404493ca52e7e7f.ctex"]
+source_file="res://assets/features/rocks/Rock_Sprite_1.png"
+dest_files=["res://.godot/imported/Rock_Sprite_1.png-b55e329bd075dd601aa5ac4ae47a5d91.ctex"]
 
 [params]
 

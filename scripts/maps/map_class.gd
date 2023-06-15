@@ -5,9 +5,7 @@ class_name MapClass
 
 @export_enum("Small", "Medium", "Large") var size: int 
 @export var map: Texture2D
-@export var noise: NoiseTexture2D
 @export var land_tile: PackedScene
-@export var cliff_tile: PackedScene
 @export var water_tile: PackedScene
 @export var biome_data: Resource
 @export var tile_pool: Node2D = Node2D.new()
@@ -27,8 +25,6 @@ func _ready():
 	scale = Size.get(size)
 	image = map.get_image()
 	image.resize(image.get_width()*scale, image.get_height()*scale)
-	noise.width = image.get_width()
-	noise.height = image.get_height()
 	self.add_child(tile_pool)
 	
 	fuzz_image()
@@ -80,13 +76,13 @@ func get_tile(x: int, y: int):
 
 
 func init_tile(x: int, y: int):
-	# Implement custom tile setting
+	# Implement tile setting
 	var tile = land_tile.instantiate()
 	return tile.init(3, false)
 
 
 func fuzz_image():
-	# Implement custom image fuzzing
+	# Implement image fuzzing
 	return
 
 

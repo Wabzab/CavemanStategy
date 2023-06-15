@@ -1,8 +1,7 @@
 extends MapClass
 
 
-@export var rage = 09
-
+@export var rage = 10
 @onready var txrRect = $TextureRect
 
 var low  = 0.49
@@ -15,10 +14,16 @@ func fuzz_image():
 
 
 func init_tile(x: int, y: int):
-	#var noise_image = noise.noise.get_image(image.get_width(), image.get_height(), false, false, true)
-	#var height = noise_image.get_pixel(x, y).r
 	var height = 1-image.get_pixel(x, y).r
 	var tile = land_tile.instantiate()
+	
+	# ----- Testing ----- #
+	if randi()%2 == 0:
+		tile.add_feature(biome_data.forest_feature)
+	else:
+		tile.add_feature(biome_data.rock_feature)
+	# ------------------- #
+	
 	if height <= low:
 		tile.set_layer(1)
 	elif height <= ramp:

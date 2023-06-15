@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db47aoda8ovhk"
-path="res://.godot/imported/land_grass.png-51cada43f928de505b791beee437d8d4.ctex"
+uid="uid://bmv2jff3quitn"
+path="res://.godot/imported/Rock_Sprite_2.png-88e8f24f542d1ebb936d15791305a8fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/imports/land_grass.png"
-dest_files=["res://.godot/imported/land_grass.png-51cada43f928de505b791beee437d8d4.ctex"]
+source_file="res://assets/features/rocks/Rock_Sprite_2.png"
+dest_files=["res://.godot/imported/Rock_Sprite_2.png-88e8f24f542d1ebb936d15791305a8fb.ctex"]
 
 [params]
 
